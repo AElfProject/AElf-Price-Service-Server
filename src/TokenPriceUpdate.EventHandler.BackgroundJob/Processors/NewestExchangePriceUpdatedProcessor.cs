@@ -37,14 +37,15 @@ namespace TokenPriceUpdate.EventHandler.BackgroundJob.Processors
             var isValid = _validPriceSupplierService.ValidPriceSuppliers(supplierNodeList);
             if (!isValid)
             {
-                _logger.LogWarning("Invalid price suppliers: ");
-                var warningMsg = new StringBuilder();
+                _logger.LogInformation("Invalid price suppliers: ");
+                var msg = new StringBuilder();
                 foreach (var supplierNode in supplierNodeList)
                 {
-                    warningMsg.Append($"{supplierNode}; ");
+                    msg.Append($"{supplierNode}; ");
                 }
-
-                _logger.LogWarning(warningMsg.ToString());
+                
+                _logger.LogInformation(msg.ToString());
+                return;
             }
 
             await _priceAppService.CreateOrUpdateTokenPriceAsync(new CreateOrUpdateTokenPriceInput
