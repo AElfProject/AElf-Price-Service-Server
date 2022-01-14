@@ -63,7 +63,7 @@ namespace TokenPriceUpdate
                 return;
             }
 
-            if (priceInfo.DateTime > input.DateTime)
+            if (priceInfo.DateTime > input.DateTime || priceInfo.Price == input.Price)
             {
                 return;
             }
